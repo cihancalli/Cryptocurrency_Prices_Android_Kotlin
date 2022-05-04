@@ -53,7 +53,8 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<CyrptoModel>>, t: Throwable) {
                 t.printStackTrace()
             }
-
         })
     }
+
+
 }
