@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.zerdasoftware.cryptocurrencyprices.R
 import com.zerdasoftware.cryptocurrencyprices.model.CyrptoModel
 import kotlinx.android.synthetic.main.row_layout.view.*
@@ -12,9 +13,7 @@ import kotlinx.android.synthetic.main.row_layout.view.*
 class RecyclerViewAdapter(private val cyrptoList : ArrayList<CyrptoModel>, private var listener : Listener) : RecyclerView.Adapter<RecyclerViewAdapter.RowHolder>() {
 
     interface Listener {
-        fun onItemClick(cyrptoModel : CyrptoModel){
-
-        }
+        fun onItemClick(cyrptoModel : CyrptoModel)
     }
 
     private var colors: Array<String> = arrayOf("#752a20","#ff7bc7","#ff6432","#b4323d","#32b4a9","#6da9df","#806600","#df4e4f","#626997","#ecce5b")
@@ -22,7 +21,8 @@ class RecyclerViewAdapter(private val cyrptoList : ArrayList<CyrptoModel>, priva
     class RowHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(cyrptoModel : CyrptoModel, colors : Array<String>, position : Int, listener : Listener)
         {
-            itemView.setBackgroundColor(Color.parseColor(colors[position % 10]))
+            Picasso.get().load(cyrptoModel.logo_url).into(itemView.imageView_logo)
+            itemView.cv_row.setBackgroundColor(Color.parseColor(colors[position % 10]))
             itemView.textView_price.text = cyrptoModel.price
             itemView.textView_currency.text = cyrptoModel.currency
             itemView.setOnClickListener {
